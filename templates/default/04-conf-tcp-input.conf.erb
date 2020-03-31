@@ -1,0 +1,9 @@
+input {
+  tcp {
+    port => 7000
+    ssl_enable => true
+    ssl_verify => false
+    ssl_cert => "/opt/elastic/logstash/ssl/logstash.elastic.aws.autodesk.com.crt"
+    ssl_key => "/opt/elastic/logstash/ssl/logstash.elastic.aws.autodesk.com.key.pk8"
+  }
+}

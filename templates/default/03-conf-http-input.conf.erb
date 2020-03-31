@@ -1,0 +1,13 @@
+input {
+  http {
+    port => 6000
+    ssl => true
+    ssl_certificate => "/opt/elastic/logstash/ssl/logstash.elastic.aws.autodesk.com.crt"
+    ssl_key => "/opt/elastic/logstash/ssl/logstash.elastic.aws.autodesk.com.key.pk8"
+    # keystore => "/opt/elastic/logstash/ssl/keystore"
+    # keystore_password => "elastic" %>
+    # Value of this setting is changed from "host" to use other field to avoid conflicts with beats 6.3 mappings.
+    # See - https://www.elastic.co/guide/en/beats/libbeat/6.3/breaking-changes-6.3.html#breaking-changes-mapping-conflict
+    remote_host_target_field => "logstash_client_host"
+  }
+}

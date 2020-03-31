@@ -1,0 +1,12 @@
+input {
+  beats {
+    port => 5044
+    ssl => true
+    ssl_certificate => "/opt/elastic/logstash/ssl/logstash.external.elastic.aws.autodesk.com.crt"
+    ssl_key => "/opt/elastic/logstash/ssl/logstash.external.elastic.aws.autodesk.com.key.pk8"
+    # Deprecated in beats v6.0.0. This setting will be removed in beats v7.0.0.
+    # This setting is set to false to avoid conflicts with beats 6.3 mappings.
+    # See - https://www.elastic.co/guide/en/beats/libbeat/6.3/breaking-changes-6.3.html#breaking-changes-mapping-conflict
+    add_hostname => false
+  }
+}

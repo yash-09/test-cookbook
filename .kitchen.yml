@@ -1,0 +1,19 @@
+---
+driver:
+  name: docker
+
+provisioner:
+ name: chef_zero
+ product_name: chef
+ product_version: 14.3.37
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-6
+
+suites:
+  - name: default
+    run_list:
+attributes: 

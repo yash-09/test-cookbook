@@ -1,0 +1,50 @@
+output {
+  if ([csn]) and [rollover_type] == "daily" {
+    # Adds routing for csn field
+      elasticsearch {
+        ssl => true
+        truststore => "/etc/logstash/truststore"
+        truststore_password => "elastic"
+        hosts => ["elasticsearch.internal.elastic.aws.autodesk.com:9200"]
+        user => "<%= node['ess-elastic-ls-prd']['elasticsearch_username'] %>"
+        password => "<%= node['ess-elastic-ls-prd']['elasticsearch_password'] %>"
+        index => "%{[auto_elasticsearch_index]}_%{+YYYY.MM.dd}"
+        routing => "%{[csn]}"
+      }
+    }
+  else if ([csn]) and [rollover_type] == "weekly" {
+      elasticsearch {
+        ssl => true
+        truststore => "/etc/logstash/truststore"
+        truststore_password => "elastic"
+        hosts => ["elasticsearch.internal.elastic.aws.autodesk.com:9200"]
+        user => "<%= node['ess-elastic-ls-prd']['elasticsearch_username'] %>"
+        password => "<%= node['ess-elastic-ls-prd']['elasticsearch_password'] %>"
+        index => "%{[auto_elasticsearch_index]}_%{+xxxx.ww}"
+        routing => "%{[csn]}"
+      }
+    }
+  else if [rollover_type] == "daily" {
+    # Adds routing for csn field
+      elasticsearch {
+        ssl => true
+        truststore => "/etc/logstash/truststore"
+        truststore_password => "elastic"
+        hosts => ["elasticsearch.internal.elastic.aws.autodesk.com:9200"]
+        user => "<%= node['ess-elastic-ls-prd']['elasticsearch_username'] %>"
+        password => "<%= node['ess-elastic-ls-prd']['elasticsearch_password'] %>"
+        index => "%{[auto_elasticsearch_index]}_%{+YYYY.MM.dd}"
+      }
+    }
+  else {
+      elasticsearch {
+        ssl => true
+        truststore => "/etc/logstash/truststore"
+        truststore_password => "elastic"
+        hosts => ["elasticsearch.internal.elastic.aws.autodesk.com:9200"]
+        user => "<%= node['ess-elastic-ls-prd']['elasticsearch_username'] %>"
+        password => "<%= node['ess-elastic-ls-prd']['elasticsearch_password'] %>"
+        index => "%{[auto_elasticsearch_index]}_%{+xxxx.ww}"
+      }
+    }
+  }

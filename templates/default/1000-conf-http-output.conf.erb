@@ -1,0 +1,17 @@
+output {
+    if [auto_elasticsearch_index] == "shotgunpci"{
+        http {
+            http_method => "post"
+            url => "https://hec.eisspl.autodesk.com:8888/services/collector/raw"
+            headers => ['Authorization', '<%= node['ess-elastic-ls-prd']['hec-token']['shotgunpci'] %>']
+        }
+    }
+
+    # if ([auto_elasticsearch_index] == "aum") and ([log_group] == "keiko-ecs-group/service" or [log_group] == "keiko-canary-ecs-group/service"){
+    #     http {
+    #         http_method => "post"
+    #         url => "https://hec.eisspl.autodesk.com:8888/services/collector/raw"
+    #         headers => ['Authorization', '<%= node['ess-elastic-ls-prd']['hec-token']['aum'] %>']
+    #     }
+    # }
+}
